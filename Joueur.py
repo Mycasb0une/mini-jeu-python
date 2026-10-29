@@ -1,11 +1,13 @@
 class joueur:
     """Représente un joueur dans le jeu."""
 
-    def __init__(self, nom, piece=None):
+    def __init__(self, nom, piece, capacite):
         """Initialise un joueur avec un nom et sa pièce de départ."""
         self.nom = nom
         self.piece = piece
+        self.capacite = capacite
         self.inventaire = set()
+        self.inventaire_capacite = capacite
 
     
 
