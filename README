@@ -1,7 +1,6 @@
 # Démarrer le jeu
 
-Ouvre un terminal dans le dossier du projet, puis lance `python main.py`.
-Le scénario du manoir est chargé depuis le dossier `scenarios/`.
+Ouvre un terminal dans le dossier du projet, puis lance python main.py
 
 #Comment le jeu fonctionne
 
