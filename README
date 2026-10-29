@@ -4,12 +4,12 @@ Ouvre un terminal dans le dossier du projet, puis lance `python main.py`
 
 # Comment le jeu fonctionne
 
-Le jeu est un jeu d'aventure textuel où le joueur explore un scénario en se déplaçant entre différentes pièces. 
+Le jeu est un *jeu d'aventure textuel* où le joueur explore un scénario en se déplaçant entre différentes pièces. <br>
 Chaque pièce peut avoir des sorties vers d'autres pièces, certaines accessibles et d'autres nécessitant des objets 
-spécifiques pour être franchies. Il a un inventaire limité par une capacité maximale, et le joueur peut interagir 
-avec les pièces et les objets qu'il trouve. Il peut également laisser tomber pour libérer de l'espace dans son inventaire.
-Le but est d'explorer le scénario, de collecter des objets et de résoudre des énigmes pour progresser dans le jeu. Les 
-objects seront alors déposés dans la salle où le joueur se trouve, et il pourra les récupérer plus tard si nécessaire. 
+spécifiques pour être franchies.  <br><br> Il a un inventaire limité par une capacité maximale, et le joueur peut interagir 
+avec les pièces et les objets qu'il trouve.<br> Il peut également laisser tomber pour libérer de l'espace dans son inventaire.<br><br>
+Le but est d'explorer le scénario, de collecter des objets et de résoudre des énigmes pour progresser dans le jeu. <br> Les 
+objects seront alors déposés dans la salle où le joueur se trouve, et il pourra les récupérer plus tard si nécessaire. <br><br>
 Le joueur peut également quitter le jeu à tout moment en entrant la commande "quitter" ou "quittez" ce qui ne
 sauvegardera pas sa progression.
 
@@ -20,11 +20,11 @@ Vous pouvez créer votre propre scénario en prenant pour exemple
 jeu vais automatiquement vous demander quel scénarios vous souhaitez faire
 
 # Quels sont les commandes ?
-ouest: se déplacer vers l'ouest <br>
-nord: se déplacer vers le nord <br>
-sud: se déplacer vers le sud <br>
-est: se déplacer vers l'est <br>
-regarder: voir la description d'un objet <br>
-objets: revoir les objets d'une salle <br>
-inventaire: voir l'inventaire actuelle <br>
-quitter: arrêter la partie <br>
+ouest: se déplacer vers l'ouest <br><br>
+nord: se déplacer vers le nord <br><br>
+sud: se déplacer vers le sud <br><br>
+est: se déplacer vers l'est <br><br>
+regarder: voir la description d'un objet <br><br>
+objets: revoir les objets d'une salle <br><br>
+inventaire: voir l'inventaire actuelle <br><br>
+quitter: arrêter la partie 
