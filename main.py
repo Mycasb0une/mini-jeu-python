@@ -12,7 +12,9 @@ def afficher_sorties(joueur, sorties_verrouillees):
         destination = sortie["piece"]
         verrouillee = (
             (joueur.piece.identifiant, direction) in sorties_verrouillees
-            and sortie["requiert"] not in joueur.inventaire
+            and not Carte.possede_objet(
+                joueur.inventaire, sortie["requiert"]
+            )
         )
         indication = " (verrouillée)" if verrouillee else ""
         print(f"  {direction} : {destination}{indication}")
@@ -95,7 +97,9 @@ while True:
         if (
             sortie_tentee is not None
             and sortie_tentee["requiert"] is not None
-            and sortie_tentee["requiert"] not in joueur1.inventaire
+            and not Carte.possede_objet(
+                joueur1.inventaire, sortie_tentee["requiert"]
+            )
         ):
             sorties_verrouillees.add((piece_depart.identifiant, commande))
             afficher_sorties(joueur1, sorties_verrouillees)
