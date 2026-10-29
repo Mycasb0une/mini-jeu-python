@@ -15,4 +15,5 @@ sauvegardera pas sa progression.
 
 #Quel scénario utiliser ?
 Vous pouvez créer votre propre scénario en prenant pour exemple
-`scenarios/manoir.json`.
+`scenarios/manoir.json`. pas besoin de modifier quoi que ce soit le
+jeu vais automatiquement vous demander quel scénarios vous souhaitez faire
