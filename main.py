@@ -136,18 +136,24 @@ print(joueur1.piece.description)
 afficher_objets(joueur1.piece)
 afficher_sorties(joueur1, sorties_verrouillees)
 
+abreviations = {"n": "nord", "s": "sud", "e": "est", "o": "ouest"}
+
 while True:
+    # Demande au joueur une direction ou une commande, puis normalise sa réponse.
     commande = input(
         "Où voulez-vous aller ? : "
     ).strip().lower()
 
+    # Termine la partie si le joueur tape "quitter" ou "quittez".
     if commande == "quitter" or commande == "quittez":
         break
 
-    if commande in ("objets", "regarder"):
+    # Affiche les objets présents dans la pièce actuelle.
+    if commande == "objets":
         afficher_objets(joueur1.piece)
         continue
 
+    # Affiche la description d'un objet dans la pièce ou dans l'inventaire.
     if commande.startswith("regarder "):
         nom_objet = commande[len("regarder "):].strip()
         objets_accessibles = (
@@ -160,6 +166,7 @@ while True:
             print(objet.description)
         continue
 
+    # Ramasse un objet de la pièce et le place dans l'inventaire.
     if commande.startswith("ramasser "):
         nom_objet = commande[len("ramasser "):].strip()
         objet = trouver_objet(joueur1.piece.objets, nom_objet)
@@ -169,6 +176,7 @@ while True:
             print(Jeu.ramasser_objet(joueur1, objet))
         continue
 
+    # Dépose un objet de l'inventaire dans la pièce actuelle.
     if commande.startswith("deposer "):
         nom_objet = commande[len("deposer "):].strip()
         objet = trouver_objet(joueur1.inventaire, nom_objet)
@@ -178,21 +186,28 @@ while True:
             print(Jeu.deposer_objet(joueur1, objet))
         continue
 
+    # Permet d'écrire "aller nord" ou "aller au nord" avant de se déplacer.
     if commande.startswith("aller "):
         commande = commande[len("aller "):].strip()
         if commande.startswith("au "):
             commande = commande[len("au "):].strip()
 
+    # Remplace une abréviation par la direction complète correspondante.
+    commande = abreviations.get(commande, commande)
+
+    # Indique au joueur qu'il doit saisir une direction si sa réponse est vide.
     if not commande:
         print("Indiquez une direction.")
         continue
 
+    # Tente le déplacement et récupère la sortie pour vérifier si elle est verrouillée.
     piece_depart = joueur1.piece
     sortie_tentee = piece_depart.sorties.get(commande)
     deplacement_reussi, message = joueur1.aller(commande)
     if message:
         print(message)
 
+    # Si le déplacement échoue, signale une sortie verrouillée si nécessaire.
     if not deplacement_reussi:
         if (
             sortie_tentee is not None
@@ -205,12 +220,14 @@ while True:
             afficher_sorties(joueur1, sorties_verrouillees)
         continue
 
+    # Après un déplacement réussi, affiche les informations de la nouvelle pièce.
     sorties_verrouillees.discard((piece_depart.identifiant, commande))
     print(f"Vous êtes maintenant dans : {joueur1.piece}")
     print(joueur1.piece.description)
     afficher_objets(joueur1.piece)
     afficher_sorties(joueur1, sorties_verrouillees)
 
+    # Termine la partie si le joueur arrive à la destination finale.
     if joueur1.piece.identifiant == scenario["arrivee"]:
         print(scenario["victoire"])
         break
