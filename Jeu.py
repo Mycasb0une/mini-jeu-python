@@ -1,4 +1,12 @@
 
+def inventaire_objets(joueur):
+    """Retourne une liste des objets dans l'inventaire du joueur.
+    :param: joueur: Le joueur dont on veut connaître l'inventaire.
+    
+    :return: Une liste des objets dans l'inventaire du joueur.
+    """
+    return list(joueur.inventaire)
+
 
 def deposer_objet(joueur, objet):
     """Essaie de déposer un objet de l'inventaire du joueur dans la pièce.
@@ -13,7 +21,7 @@ def deposer_objet(joueur, objet):
     :effet de bord: Oui
     """
     poids_actuel = sum(objet.poids for objet in joueur.inventaire)
-    
+
     if objet not in joueur.inventaire:
         return "Vous n'avez pas cet objet dans votre inventaire."
 
@@ -36,7 +44,7 @@ def ramasser_objet(joueur, objet):
     """
 
     if objet.particularite == "fixe":
-            return "Vous ne pouvez pas ramasser cet objet, il est fixé au sol."
+            return "Vous ne pouvez pas ramasser cet objet, il est fixé."
         
     poids_actuel = sum(objet.poids for objet in joueur.inventaire)
 
