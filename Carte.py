@@ -19,6 +19,23 @@ class piece:
 
         return sortie["piece"], sortie.get("ouverture", "")
 
+    def sorties_accessibles(self, inventaire):
+        return {
+            direction: sortie["piece"]
+            for direction, sortie in self.sorties.items()
+            if sortie["requiert"] is None
+            or sortie["requiert"] in inventaire
+        }
+
+    def sorties_inaccessibles(self, inventaire):
+        return {
+            direction: sortie["piece"]
+            for direction, sortie in self.sorties.items()
+            if sortie["requiert"] is not None
+            and sortie["requiert"] not in inventaire
+        }
+
+    
     def __str__(self):
         return self.name
 
