@@ -16,15 +16,9 @@ def afficher_sorties(joueur):
             joueur.inventaire
         ).items()
     ]
-
-    if sorties_accessibles:
-        print("Pièces accessibles : " + ", ".join(sorties_accessibles))
-    else:
-        print("Aucune pièce accessible depuis ici.")
-
-    if sorties_inaccessibles:
-        print("Pièces inaccessibles : " + ", ".join(sorties_inaccessibles))
-
+    print("Les sorties sont :")
+    for sortie in sorties_accessibles + sorties_inaccessibles:
+        print(f"  {sortie}")
 
 nom = input("Entrez le nom du joueur : ")
 FICHIER_JSON = "manoir.json"
