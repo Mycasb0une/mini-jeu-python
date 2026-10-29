@@ -1,13 +1,24 @@
+#---Point d'entrée du jeu et interface textuelle avec le joueur---
+
 import json
 from pathlib import Path
 
 import Joueur, Carte, Jeu
+import Objet
 
+def afficher_sorties(joueur: Joueur.joueur, sorties_verrouillees: set[tuple[str, str]]) -> None:
+    """Affiche les sorties de la pièce et indique celles qui restent verrouillées.
 
+    :param: joueur: Joueur dont la pièce actuelle fournit les sorties à afficher.
+            sorties_verrouillees: Couples (identifiant de pièce, direction)
+        déjà tentés sans posséder l'objet requis.
 
-def afficher_sorties(joueur, sorties_verrouillees):
-    """Affiche les sorties et signale celles déjà testées sans 
-    la bonne clé."""
+    :precondition: Le joueur doit avoir une pièce actuelle.
+
+    :return: Aucun.
+
+    :effet de bord: Oui
+    """
     print("Les sorties sont :")
     for direction, sortie in joueur.piece.sorties.items():
         destination = sortie["piece"]
@@ -21,8 +32,17 @@ def afficher_sorties(joueur, sorties_verrouillees):
         print(f"  {direction} : {destination}{indication}")
 
 
-def afficher_objets(piece):
-    """Affiche les objets présents dans une pièce."""
+def afficher_objets(piece: Carte.piece) -> None:
+    """Affiche les objets présents dans une pièce.
+
+    :param piece: Pièce dont les objets doivent être affichés.
+
+    :precondition: Aucune
+
+    :return: Aucun.
+
+    :effet de bord: Oui
+    """
     if not piece.objets:
         print("Il n'y a aucun objet dans cette pièce.")
         return
@@ -32,16 +52,41 @@ def afficher_objets(piece):
         print(f"  {objet.nom}")
 
 
-def trouver_objet(objets, nom):
-    """Trouve un objet par son nom affiché ou son identifiant."""
+def trouver_objet(objets: list[Objet.objet], nom: str) -> Objet.objet | None:
+    """Recherche un objet à partir de son nom affiché ou de son identifiant.
+
+    Les noms et identifiants des objets sont comparés en minuscules ;
+    la valeur de ``nom`` doit donc déjà être normalisée.
+
+    :param: objets: Objets parmi lesquels effectuer la recherche.
+            nom: Nom ou identifiant recherché, en minuscules.
+    
+    :precondition: Aucune
+
+    :return: Le premier objet correspondant, ou ``None`` si aucun ne
+        correspond.
+    
+    :effet de bord: Aucun
+    """
     for objet in objets:
         if objet.nom.lower() == nom or objet.identifiant.lower() == nom:
             return objet
     return None
 
 
-def choisir_scenario(dossier_scenarios):
-    """Affiche les scénarios JSON disponibles et renvoie celui sélectionné."""
+def choisir_scenario(dossier_scenarios: Path) -> Path:
+    """Propose les scénarios JSON disponibles et renvoie celui sélectionné.
+
+    :param dossier_scenarios: Dossier où rechercher les fichiers ``.json``.
+    
+    :precondition: Aucune
+
+    :return: Chemin du scénario choisi.
+
+    :raises SystemExit: Si aucun fichier JSON n'est trouvé dans le dossier.
+    
+    :effet de bord: Oui
+    """
     scenarios = sorted(dossier_scenarios.glob("*.json"))
     if not scenarios:
         raise SystemExit(
