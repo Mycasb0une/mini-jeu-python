@@ -1,6 +1,7 @@
 # Démarrer le jeu
 
-Ouvre un terminal dans le dossier du projet, puis lance main
+Ouvre un terminal dans le dossier du projet, puis lance `python main.py`.
+Le scénario du manoir est chargé depuis le dossier `scenarios/`.
 
 #Comment le jeu fonctionne
 
@@ -14,4 +15,5 @@ Le joueur peut également quitter le jeu à tout moment en entrant la commande "
 sauvegardera pas sa progression.
 
 #Quel scénario utiliser ?
-vous pouvez créer votre propre scénario en prenant pour exemple manoir.json pour ce programme
+Vous pouvez créer votre propre scénario en prenant pour exemple
+`scenarios/manoir.json`.

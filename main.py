@@ -1,4 +1,6 @@
 import json
+from pathlib import Path
+
 import Joueur
 import Carte
 
@@ -21,7 +23,7 @@ def afficher_sorties(joueur):
         print(f"  {sortie}")
 
 nom = input("Entrez le nom du joueur : ")
-FICHIER_JSON = "manoir.json"
+FICHIER_JSON = Path(__file__).resolve().parent / "scenarios" / "manoir.json"
 with open(FICHIER_JSON, "r", encoding="utf-8") as fichier:
     scenario = json.load(fichier)
 
