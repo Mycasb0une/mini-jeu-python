@@ -1,29 +1,52 @@
-import Carte
 
 
-def ramasser_objet(joueur, objet):
-    """Essaie d'ajouter un objet portable à l'inventaire du joueur et
-    le retire de la salle.
-    :param: joueur: Le joueur qui tente de ramasser l'objet
-            objet: L'objet que le joueur tente de ramasser
+def deposer_objet(joueur, objet):
+    """Essaie de déposer un objet de l'inventaire du joueur dans la pièce.
+     et l'ajoute à la salle.
+    :param: joueur: Le joueur qui tente de déposer l'objet
+            objet: L'objet que le joueur tente de déposer
     
-    :precondition: L'objet doit être dans la pièce du joueur 
-    et ne pas dépasser la capacité de l'inventaire.
+    :precondition: L'objet doit être dans l'inventaire du joueur.
     
     :return: Un message indiquant le résultat de l'action.
 
     :effet de bord: Oui
     """
+    poids_actuel = sum(objet.poids for objet in joueur.inventaire)
+    
+    if objet not in joueur.inventaire:
+        return "Vous n'avez pas cet objet dans votre inventaire."
+
+    joueur.inventaire.remove(objet)
+    joueur.piece.objets.append(objet)
+    poids_actuel = sum(objet.poids for objet in joueur.inventaire)
+    return f"Vous avez déposé {objet.nom}."
+
+
+def ramasser_objet(joueur, objet):
+    """Essaie de ramasser un objet dans la pièce et l'ajoute à l'inventaire du joueur.
+    :param: joueur: Le joueur qui tente de ramasser l'objet
+            objet: L'objet que le joueur tente de ramasser
+    
+    :precondition: L'objet doit être dans la pièce où se trouve le joueur.
+    
+    :return: Un message indiquant le résultat de l'action.
+
+    :effet de bord: Oui
+    """
+
     if objet.particularite == "fixe":
-        return "Cet objet est fixé et ne peut pas être ramassé."
+            return "Vous ne pouvez pas ramasser cet objet, il est fixé au sol."
+        
+    poids_actuel = sum(objet.poids for objet in joueur.inventaire)
 
     if objet not in joueur.piece.objets:
         return "Cet objet n'est pas dans cette pièce."
-
-    poids_actuel = sum(item.poids for item in joueur.inventaire)
+    
     if poids_actuel + objet.poids > joueur.capacite:
-        return "Cet objet est trop lourd pour être ramassé."
+        return "Vous ne pouvez pas ramasser cet objet, il est trop lourd."
 
-    joueur.piece.objets.remove(objet)
     joueur.inventaire.add(objet)
+    joueur.piece.objets.remove(objet)
+    poids_actuel += objet.poids
     return f"Vous avez ramassé {objet.nom}."
