@@ -4,6 +4,7 @@ def inventaire_objets(joueur):
     :param: joueur: Le joueur dont on veut connaître l'inventaire.
     
     :return: Une liste des objets dans l'inventaire du joueur.
+    :effet de bord: Aucun
     """
     return list(joueur.inventaire)
 
