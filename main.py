@@ -1,6 +1,6 @@
 import json
 import Joueur
-import Piece
+import Carte
 
 
 nom = input("Entrez le nom du joueur : ")
@@ -10,7 +10,7 @@ with open(FICHIER_JSON, "r", encoding="utf-8") as fichier:
 
 print(scenario["titre"])
 print(scenario["intro"])
-carte = Piece.carte(scenario)
+carte = Carte.carte(scenario)
 if scenario["depart"] not in carte.pieces:
     raise ValueError(
         f"La pièce de départ {scenario['depart']!r} n'existe pas."
