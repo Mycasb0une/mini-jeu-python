@@ -1,12 +1,13 @@
 import json
 from pathlib import Path
 
-import Joueur
-import Carte
+import Joueur, Carte, Jeu
+
 
 
 def afficher_sorties(joueur, sorties_verrouillees):
-    """Affiche les sorties et signale celles déjà testées sans la bonne clé."""
+    """Affiche les sorties et signale celles déjà testées sans 
+    la bonne clé."""
     print("Les sorties sont :")
     for direction, sortie in joueur.piece.sorties.items():
         destination = sortie["piece"]
@@ -18,6 +19,25 @@ def afficher_sorties(joueur, sorties_verrouillees):
         )
         indication = " (verrouillée)" if verrouillee else ""
         print(f"  {direction} : {destination}{indication}")
+
+
+def afficher_objets(piece):
+    """Affiche les objets présents dans une pièce."""
+    if not piece.objets:
+        print("Il n'y a aucun objet dans cette pièce.")
+        return
+
+    print("Les objets dans cette pièce sont :")
+    for objet in piece.objets:
+        print(f"  {objet.nom}")
+
+
+def trouver_objet(objets, nom):
+    """Trouve un objet par son nom affiché ou son identifiant."""
+    for objet in objets:
+        if objet.nom.lower() == nom or objet.identifiant.lower() == nom:
+            return objet
+    return None
 
 
 def choisir_scenario(dossier_scenarios):
@@ -68,6 +88,7 @@ joueur1 = Joueur.joueur(
 sorties_verrouillees = set()
 print(f"Vous êtes dans la pièce : {joueur1.piece}")
 print(joueur1.piece.description)
+afficher_objets(joueur1.piece)
 afficher_sorties(joueur1, sorties_verrouillees)
 
 while True:
@@ -77,6 +98,40 @@ while True:
 
     if commande == "quitter" or commande == "quittez":
         break
+
+    if commande in ("objets", "regarder"):
+        afficher_objets(joueur1.piece)
+        continue
+
+    if commande.startswith("regarder "):
+        nom_objet = commande[len("regarder "):].strip()
+        objets_accessibles = (
+            joueur1.piece.objets + list(joueur1.inventaire)
+        )
+        objet = trouver_objet(objets_accessibles, nom_objet)
+        if objet is None:
+            print("Vous ne voyez pas cet objet ici.")
+        else:
+            print(objet.description)
+        continue
+
+    if commande.startswith("ramasser "):
+        nom_objet = commande[len("ramasser "):].strip()
+        objet = trouver_objet(joueur1.piece.objets, nom_objet)
+        if objet is None:
+            print("Cet objet n'est pas dans cette pièce.")
+        else:
+            print(Jeu.ramasser_objet(joueur1, objet))
+        continue
+
+    if commande.startswith("deposer "):
+        nom_objet = commande[len("deposer "):].strip()
+        objet = trouver_objet(joueur1.inventaire, nom_objet)
+        if objet is None:
+            print("Vous n'avez pas cet objet dans votre inventaire.")
+        else:
+            print(Jeu.deposer_objet(joueur1, objet))
+        continue
 
     if commande.startswith("aller "):
         commande = commande[len("aller "):].strip()
@@ -108,6 +163,7 @@ while True:
     sorties_verrouillees.discard((piece_depart.identifiant, commande))
     print(f"Vous êtes maintenant dans : {joueur1.piece}")
     print(joueur1.piece.description)
+    afficher_objets(joueur1.piece)
     afficher_sorties(joueur1, sorties_verrouillees)
 
     if joueur1.piece.identifiant == scenario["arrivee"]:
