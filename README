@@ -1,8 +1,8 @@
 # Démarrer le jeu
 
-Ouvre un terminal dans le dossier du projet, puis lance python main.py
+Ouvre un terminal dans le dossier du projet, puis lance `python main.py`
 
-#Comment le jeu fonctionne
+# Comment le jeu fonctionne
 
 Le jeu est un jeu d'aventure textuel où le joueur explore un scénario en se déplaçant entre différentes pièces. 
 Chaque pièce peut avoir des sorties vers d'autres pièces, certaines accessibles et d'autres nécessitant des objets 
@@ -13,7 +13,18 @@ objects seront alors déposés dans la salle où le joueur se trouve, et il pour
 Le joueur peut également quitter le jeu à tout moment en entrant la commande "quitter" ou "quittez" ce qui ne
 sauvegardera pas sa progression.
 
-#Quel scénario utiliser ?
+
+# Quel scénario utiliser ?
 Vous pouvez créer votre propre scénario en prenant pour exemple
 `scenarios/manoir.json`. pas besoin de modifier quoi que ce soit le
 jeu vais automatiquement vous demander quel scénarios vous souhaitez faire
+
+# Quels sont les commandes ?
+ouest: se déplacer vers l'ouest <br>
+nord: se déplacer vers le nord <br>
+sud: se déplacer vers le sud <br>
+est: se déplacer vers l'est <br>
+regarder: voir la description d'un objet <br>
+objets: revoir les objets d'une salle <br>
+inventaire: voir l'inventaire actuelle <br>
+quitter: arrêter la partie <br>
