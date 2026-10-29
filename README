@@ -12,3 +12,6 @@ Le but est d'explorer le scénario, de collecter des objets et de résoudre des 
 objects seront alors déposés dans la salle où le joueur se trouve, et il pourra les récupérer plus tard si nécessaire. 
 Le joueur peut également quitter le jeu à tout moment en entrant la commande "quitter" ou "quittez" ce qui ne
 sauvegardera pas sa progression.
+
+#Quel scénario utiliser ?
+vous pouvez créer votre propre scénario en prenant pour exemple manoir.json pour ce programme
