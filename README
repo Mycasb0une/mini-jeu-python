@@ -1,3 +1,14 @@
 # Démarrer le jeu
 
 Ouvre un terminal dans le dossier du projet, puis lance main
+
+#Comment le jeu fonctionne
+
+Le jeu est un jeu d'aventure textuel où le joueur explore un scénario en se déplaçant entre différentes pièces. 
+Chaque pièce peut avoir des sorties vers d'autres pièces, certaines accessibles et d'autres nécessitant des objets 
+spécifiques pour être franchies. Il a un inventaire limité par une capacité maximale, et le joueur peut interagir 
+avec les pièces et les objets qu'il trouve. Il peut également laisser tomber pour libérer de l'espace dans son inventaire.
+Le but est d'explorer le scénario, de collecter des objets et de résoudre des énigmes pour progresser dans le jeu. Les 
+objects seront alors déposés dans la salle où le joueur se trouve, et il pourra les récupérer plus tard si nécessaire. 
+Le joueur peut également quitter le jeu à tout moment en entrant la commande "quitter" ou "quittez" ce qui ne
+sauvegardera pas sa progression.
